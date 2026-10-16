@@ -258,7 +258,11 @@ function onTrade(t) {
   const p = prec();
   trades.unshift({ px: +t.p, q: +t.q, sell: t.m, t: t.T });
   if (trades.length > 40) trades.pop();
+  renderTrades();
+}
+function renderTrades() {
   if ($('tradesView').classList.contains('hidden')) return;
+  const p = prec();
   const time = (ms) => new Date(ms).toLocaleTimeString('en-GB');
   $('tradeRows').innerHTML = trades.map((x) =>
     `<div class="row"><span class="${x.sell ? 'down' : 'up'}">${fmt(x.px, p)}</span><span>${fmt(x.q, 3)}</span><span>${time(x.t)}</span></div>`).join('');
@@ -295,9 +299,22 @@ bindGroup('ind', 'ind', (k, on) => {
   state.ind[k] = on;
   renderIndicators();
 }, true);
-bindGroup('sideTabs', 'tab', (t) => {
+function showSide(t) {
   $('bookView').classList.toggle('hidden', t !== 'book');
   $('tradesView').classList.toggle('hidden', t !== 'trades');
+  renderTrades();
+}
+bindGroup('sideTabs', 'tab', showSide);
+// mobile bottom navigation: one full-screen section at a time
+$('bottomNav').addEventListener('click', (e) => {
+  const b = e.target.closest('button'); if (!b) return;
+  [...$('bottomNav').children].forEach((x) => x.classList.toggle('active', x === b));
+  const m = b.dataset.m;
+  document.body.className = m === 'chart' ? 'm-chart' : 'm-side';
+  if (m !== 'chart') {
+    showSide(m);
+    [...$('sideTabs').children].forEach((x) => x.classList.toggle('active', x.dataset.tab === m));
+  }
 });
 
 restart();
