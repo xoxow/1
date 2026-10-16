@@ -1,0 +1,70 @@
+:root{
+  --bg:#0B0E11; --panel:#181A20; --line:#2B3139; --text:#EAECEF; --sub:#848E9C;
+  --up:#0ECB81; --down:#F6465D; --accent:#FCD535; --hover:#2B3139;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--text);font:12px/1.4 "Binance Plex","IBM Plex Sans",-apple-system,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;display:flex;flex-direction:column;min-height:100vh}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.up{color:var(--up)} .down{color:var(--down)}
+
+.nav{height:56px;background:var(--panel);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+.logo{font-weight:800;font-size:18px;color:var(--accent);letter-spacing:.5px;display:flex;align-items:center;gap:8px}
+.logo-sub{font-size:11px;font-weight:500;color:var(--sub);margin-left:6px;letter-spacing:1px}
+.conn{display:flex;align-items:center;gap:6px;color:var(--sub)}
+.conn i{width:8px;height:8px;border-radius:50%;background:var(--sub)}
+.conn.ok i{background:var(--up)} .conn.bad i{background:var(--down)}
+
+.ticker-bar{display:flex;align-items:center;gap:28px;padding:10px 16px;background:var(--panel);border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap}
+.sym-switch{display:flex;gap:4px;background:var(--bg);padding:3px;border-radius:6px}
+.sym-switch button{padding:4px 12px;border-radius:4px;display:flex;flex-direction:column;align-items:flex-start;color:var(--sub)}
+.sym-switch button b{font-size:15px;color:inherit}
+.sym-switch button small{font-size:10px}
+.sym-switch button.active{background:var(--hover);color:var(--text)}
+.last-price{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}
+.last-usd{font-size:12px;color:var(--sub)}
+.stat{display:flex;flex-direction:column;gap:2px}
+.stat label{font-size:11px;color:var(--sub)}
+.stat span{font-variant-numeric:tabular-nums;font-size:12px}
+.warn{color:var(--accent);font-style:normal}
+em{font-style:normal}
+
+.layout{flex:1;display:grid;grid-template-columns:1fr 300px;gap:4px;padding:4px;min-height:0}
+.panel{background:var(--panel);border-radius:4px;display:flex;flex-direction:column;min-height:0}
+.chart-panel{position:relative}
+.chart-tools{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--line)}
+.sep{width:1px;height:16px;background:var(--line)}
+.tf button,.ind button{padding:3px 8px;border-radius:3px;color:var(--sub)}
+.tf button:hover,.ind button:hover{color:var(--text)}
+.tf button.active{color:var(--accent);background:var(--hover)}
+.ind button.active{color:var(--accent)}
+.legend{position:absolute;top:44px;left:14px;z-index:5;font-size:11px;font-variant-numeric:tabular-nums;pointer-events:none;display:flex;flex-direction:column;gap:2px}
+.legend .ohlc span{margin-right:8px}
+.legend .ohlc label{color:var(--sub);margin-right:2px}
+#chart{flex:1;min-height:420px}
+
+.side-panel{min-width:0}
+.tabs{display:flex;gap:16px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.tabs button{color:var(--sub);padding-bottom:4px;border-bottom:2px solid transparent}
+.tabs button.active{color:var(--text);border-color:var(--accent)}
+.view{display:flex;flex-direction:column;flex:1;min-height:0;padding:6px 0;overflow:hidden}
+.hidden{display:none}
+.th,.row{display:grid;grid-template-columns:1.2fr 1fr 1fr;padding:0 12px}
+.th{color:var(--sub);font-size:11px;padding-bottom:4px}
+.th span:not(:first-child),.row span:not(:first-child){text-align:right}
+.rows{display:flex;flex-direction:column;overflow:hidden;font-variant-numeric:tabular-nums}
+.asks{flex:1;justify-content:flex-end}
+.bids{flex:1}
+.row{position:relative;height:20px;align-items:center}
+.row .bar{position:absolute;right:0;top:1px;bottom:1px;opacity:.15}
+.asks .bar{background:var(--down)} .bids .bar{background:var(--up)}
+.row span{position:relative}
+.mid{display:flex;align-items:baseline;gap:10px;padding:8px 12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:4px 0}
+.mid b{font-size:18px;font-variant-numeric:tabular-nums}
+.mid small{color:var(--sub)}
+#tradeRows .row{grid-template-columns:1.2fr 1fr 1fr}
+
+@media(max-width:900px){
+  .layout{grid-template-columns:1fr;grid-auto-rows:minmax(420px,auto)}
+  .ticker-bar{gap:18px}
+}

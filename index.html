@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BTC·ETH Futures Chart</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="nav">
+  <div class="logo"><span class="logo-mark">◆</span> FUTURES<span class="logo-sub">BTC · ETH</span></div>
+  <div class="conn" id="conn"><i></i><span>연결 중</span></div>
+</header>
+
+<section class="ticker-bar">
+  <div class="sym-switch" id="symSwitch">
+    <button data-sym="BTCUSDT" class="active"><b>BTCUSDT</b><small>무기한</small></button>
+    <button data-sym="ETHUSDT"><b>ETHUSDT</b><small>무기한</small></button>
+  </div>
+  <div class="last">
+    <div class="last-price" id="lastPrice">--</div>
+    <div class="last-usd" id="lastUsd">$--</div>
+  </div>
+  <div class="stat"><label>24시간 변동</label><span id="chg">--</span></div>
+  <div class="stat"><label>마크</label><span id="mark">--</span></div>
+  <div class="stat"><label>인덱스</label><span id="index">--</span></div>
+  <div class="stat"><label>펀딩 비율 / 카운트다운</label><span><em id="funding" class="warn">--</em> / <em id="countdown">--</em></span></div>
+  <div class="stat"><label>24시간 고가</label><span id="high">--</span></div>
+  <div class="stat"><label>24시간 저가</label><span id="low">--</span></div>
+  <div class="stat"><label id="volBaseLabel">24시간 거래량(BTC)</label><span id="volBase">--</span></div>
+  <div class="stat"><label>24시간 거래대금(USDT)</label><span id="volQuote">--</span></div>
+</section>
+
+<main class="layout">
+  <section class="panel chart-panel">
+    <div class="chart-tools">
+      <div class="tf" id="tf">
+        <button data-i="1m">1m</button>
+        <button data-i="5m">5m</button>
+        <button data-i="15m" class="active">15m</button>
+        <button data-i="1h">1h</button>
+        <button data-i="4h">4h</button>
+        <button data-i="1d">1D</button>
+        <button data-i="1w">1W</button>
+      </div>
+      <div class="sep"></div>
+      <div class="ind" id="ind">
+        <button data-ind="ma" class="active">MA</button>
+        <button data-ind="ema">EMA</button>
+        <button data-ind="boll">BOLL</button>
+        <button data-ind="vol" class="active">VOL</button>
+      </div>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div id="chart"></div>
+  </section>
+
+  <aside class="panel side-panel">
+    <div class="tabs" id="sideTabs">
+      <button data-tab="book" class="active">호가창</button>
+      <button data-tab="trades">최근 체결</button>
+    </div>
+    <div id="bookView" class="view">
+      <div class="th"><span>가격(USDT)</span><span>수량</span><span>합계</span></div>
+      <div id="asks" class="rows asks"></div>
+      <div class="mid" id="midPrice"><b>--</b><small>--</small></div>
+      <div id="bids" class="rows bids"></div>
+    </div>
+    <div id="tradesView" class="view hidden">
+      <div class="th"><span>가격(USDT)</span><span>수량</span><span>시간</span></div>
+      <div id="tradeRows" class="rows"></div>
+    </div>
+  </aside>
+</main>
+
+<script src="vendor/lightweight-charts.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
